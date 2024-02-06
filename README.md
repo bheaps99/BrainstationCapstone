@@ -72,12 +72,12 @@ matrix element multiplied by every other matrix element. Model with Hermitian an
 Investigate sum of Eigenvalues and Eigenvectors components to see if Neural Network model accurately and use
 this sum in future Neural Network modelling as a term - passed directly to the neural network instead of having its value in a layer - this will decrease modelling time in neural network modelling
 
-Paul Smith - Instructor at Brainstation 
+Paul Smith - Instructor at Brainstation <br>
 Credited for Neural Network Model Parameters for Eigenvector Eigenvalue Neural Network
 
 model = keras.Sequential()<br>
 #Declare the hidden layers<br>
-model.add(layers.Dense(120, activation="relu")) <br>model.add(layers.Dense(120, activation="relu")) <br>model.add(layers.Dense(120, activation="relu")) <br>model.add(layers.Dense(60, activation="relu")) <br>model.add(layers.Dense(30, activation="relu"))
+model.add(layers.Dense(120, activation="relu")) <br>model.add(layers.Dense(120, activation="relu")) <br>model.add(layers.Dense(120, activation="relu")) <br>model.add(layers.Dense(60, activation="relu")) <br>model.add(layers.Dense(30, activation="relu"))<br>
 #Declare the output layer<br>
 model.add(layers.Dense(12, activation="linear"))<br>
 
@@ -85,7 +85,7 @@ Evaluate Neural Network Models with Mean Average Error for the terms using
 datasets of randomly generated 3x3 matrices and corresponding eigenvalues/eigenvectors. Also use Mean Average Error as a ratio against the range of values
 **EigenVectorsEigenValuesNeuralNetwork.ipynb** results included Notebook
 
-**********************************************************************************************************
+### List of Neural Network Results
 *Neural Network Mean Average Error*<br>
 3501 randomly generated matrices with values between 0-6 for **Hermitian** 3x3 Matrices
 
