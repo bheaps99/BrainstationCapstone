@@ -1,198 +1,183 @@
-# BrainstationCapstone
-
+# A Data Science/Machine Learning Approach to Matrix Inversion
+```
+Brainstation Data Science Bootcamp - Capstone Project
+Nov 2023-February 2024
 By Ben Heaps
+```
 
-Matrix Inversion Investigation
+There is a tremendous amount of research being done in the area of Matrix Inversion to improve
+the algorithms for Matrix Inversion. Speed of computation is a big issue as well as time complexity.
 
-There is a tremendous amount of research being done in this area at this time to improve
-many algorithms for matrix inversion. Speed of computation is a big issue and better algorithms
-can invert matrices that are too complex to currently invert or take too much time
+Purpose of this project is to attempt to find a better matrix inversion algorithm. Modelling
+for inverse of Hermitian (symetric) matrices and non Hermitian matrices. Applying Linear Regression 
+to better understand which mathematical combinations of matrix terms are best for modelling the inverse of
+a matrix. Use a Neural Network to model Eigenvectors and Eigenvalues which are a property of matrix 
+by the formula: <br>$Av = λv$ where **v=matrix of Eigenvectors** and **λ=Eigenvalues**. <br>
+$A^{-1}v = v/λ$
 
-I will attempt to find a data science solution to finding a better matrix inversion algorithm.
-I will run tests with Hermitian (symetric) matrices and non symetric matrices. I will work with
-3x3 matrices for now and will possibly work with larger matrices in future steps. 
+Matrix Inverse can also be calculated by the Adjoint Matrix divided by the Determinant. <br>
+Determinant of a 2x2 matrix is: $|A| = (a11 a22) - (a12 a21)$<br>
+Determinant of a 3x3 matrix is: $|A| = a11 (a22 a33 – a23 a32) – a12 (a21 a33 – a23 a31) + a13 (a21 a32 – a22 a31)$
+<br>The adjoint of a square matrix $A = [aij]n×n$ is defined as the transpose of the matrix $[Aij]n×n$ , where Aij 
+is the cofactor of the element aij. 
 
+## Linear Regression
 
+A selection of combination of matrix elements - attempt to demonstrate the progression of dependence on matrix inverse
+The following tests demonstrate the importance of terms when considering the inverse of a matrix
 
-I will work with linear regression with various tests, I will include the following tests:
+**Test 1**: linear regression between matrix elements and inverse matrix elements
 
-Test 1: linear regression between matrix elements and inverse matrix elements
-
-Test 2: linear regression with test 1 and all possible combinations of one matrix element 
+**Test 2**: linear regression with test 1 and all possible combinations of one matrix element 
 multiplied by every other matrix element
 
-Test 3: linear regression with test 2 and the square of each matrix element
+**Test 3**: linear regression with test 2 and the square of each matrix element
 
-Test 4: linear regression with test 1 and all possible combinations of one matrix element 
+**Test 4**: linear regression with test 1 and all possible combinations of one matrix element 
 squared and multiplied by every other matrix element and the cube of each matrix element
 
-Jupyter Notebook LinearRegressionMatrixInverse.ipynb will be used for this Analysis
+_This list of tests demonstrates the most important combinations of matrix elements for modelling matrix inverse in descending order_
 
-Results will be summarized in 3x3TestResults.pdf
-
-In AutomatedTesting.ipynb perform the right number of iterations to generate the mean of r squared value
-for each inverse cell to be statistically different than the others with an acceptable p value 
-with an ANOVA Test for Test 4
-
-Results will be summarized in AutomatedTesting.pdf
-
-------------------------------------------------------------------------------------------------
-I found that with Test 4 I could generate a Linear Regression model with an R Squared value of
-0.044 averaged across all 9 cells of a 3x3 matrix. This is not sufficient for determining
-the inverse of a 3x3 matrix but it is interesting nonetheless
+**LinearRegressionMatrixInverse.ipynb** 3x3 randomly generated matrices Linear Regression code<br>
+**3x3TestResults.pdf** Results summary
 
 R-squared (R2) is a statistical measure that represents the proportion of the variance for a dependent 
 variable that’s explained by an independent variable in a regression model.
 
-a good linear regression will have a r squared value of 0.2, a perfect fit will have a value of 1
-
-So I have not found a suitable linear regresssion model
------------------------------------------------------------------------------------------------
 
 
+Different sets of random matrices produced very different results in LinearRegressionMatrixInverse.ipynb<br>Use Automation to execute iterations of Test4 to generate the mean of r squared value
+for each inverse cell to be statistically different than other cells with an acceptable p value 
+with an ANOVA Test for Test 4. Iterating until a statistically significant solution is achieved.
+Analysis of variance (ANOVA) is a collection of statistical models and their associated estimation procedures 
+(such as the "variation" among and between groups) used to analyze the differences among means.
 
+**AutomatedTesting.ipynb** Notebook for Test 4 interations to generate an acceptable measure of accuracy<br>
+**AutomatedTesting.pdf** Results summary
 
-
-
-I will work with Neural Networks to model matrix eigenvectors and eigenvalues and sum of 
-eigenvalues and sum of eigenvector values as they can play a part in matrix inverse by the 
-following formula: Av = A^    ^ is lambda or eigenvalues
-modelling the eigenvectors and eigenvalues can be used for future study of matrix
-inversion with machine learning
-
-details of my model and work can be found in EigenVectorsEigenValuesNeuralNetwork.ipynb
-
-I have evaluated my neural networks with Mean Average Error for the terms usring the test 
-dataset of randomly generated 3x3 matrices and the corresponding eigenvalues/eigenvectors
-
------------------------------------------------------------------------------------------------
-
-the results are for a test with 3501 matrices with values between 0-6 for Hermitian Matrices
-REMEMBER WE ARE WORKING WITH 3x3 matrices
-
-[['MAE for: eigen1', '0.0855'],    eigenvalue 1 Mean Average error
- ['MAE for: eigen2', '0.0529'],    eigenvalue 2 Mean Average error
- ['MAE for: eigen3', '0.0474']     eigenvalue 3 Mean Average error
- ['MAE for: eigenv1', '0.0171'],   eigenvector element 1 of 9 Mean Average Error
- ['MAE for: eigenv2', '0.0294'],   eigenvector element 2 of 9 Mean Average Error
- ['MAE for: eigenv3', '0.0266'],   eigenvector element 3 of 9 Mean Average Error
- ['MAE for: eigenv4', '0.0163'],   eigenvector element 4 of 9 Mean Average Error
- ['MAE for: eigenv5', '0.0281'],   eigenvector element 5 of 9 Mean Average Error
- ['MAE for: eigenv6', '0.0245'],   eigenvector element 6 of 9 Mean Average Error
- ['MAE for: eigenv7', '0.0152'],   eigenvector element 7 of 9 Mean Average Error
- ['MAE for: eigenv8', '0.0245'],   eigenvector element 8 of 9 Mean Average Error
- ['MAE for: eigenv9', '0.0271'],   eigenvector element 9 of 9 Mean Average Error
- ['sumEigenvectorMAE', '0.0525'],  sum of eigen vector elements Mean Average Error
- ['sumEigenvaluesMAE', '0.0499']]  sum of all 9 eigenvalue elements from 3 eigenvectors Mean Average Error
-
- [['%MAE for: eigen1', '0.0122'],    Mean Average Error as a percentage against range of values of the terms
- ['%MAE for: eigen2', '0.0640'],
- ['%MAE for: eigen3', '0.0424'],
- ['%MAE for: eigenv1', '0.0086'],
- ['%MAE for: eigenv2', '0.0147'],
- ['%MAE for: eigenv3', '0.0134'],
- ['%MAE for: eigenv4', '0.0083'],
- ['%MAE for: eigenv5', '0.0141'],
- ['%MAE for: eigenv6', '0.0123'],
- ['%MAE for: eigenv7', '0.0077'],
- ['%MAE for: eigenv8', '0.0123'],
- ['%MAE for: eigenv9', '0.0136'],
- ['sumEigenvectorMAE%', '0.0067'],
- ['sumEigenvaluesMAE%', '0.0028']]
-
- ---------------------------------------------
-
-the results are for a test with 3501 matrices with values between 0-6 for Non Hermitian Matrices
-
-resultsList
-[['MAE for: eigen1', '0.0898'],   eigenvalue 1 Mean Average error
- ['MAE for: eigen2', '0.0486'],   eigenvalue 2 Mean Average error
- ['MAE for: eigen3', '0.0530'],   eigenvalue 3 Mean Average error
- ['MAE for: eigenv1', '0.0183'],  eigenvector element 1 of 9 Mean Average Error
- ['MAE for: eigenv2', '0.0324'],  eigenvector element 2 of 9 Mean Average Error
- ['MAE for: eigenv3', '0.0288'],  eigenvector element 3 of 9 Mean Average Error
- ['MAE for: eigenv4', '0.0167'],  eigenvector element 4 of 9 Mean Average Error
- ['MAE for: eigenv5', '0.0247'],  eigenvector element 5 of 9 Mean Average Error
- ['MAE for: eigenv6', '0.0274'],  eigenvector element 6 of 9 Mean Average Error
- ['MAE for: eigenv7', '0.0145'],  eigenvector element 7 of 9 Mean Average Error
- ['MAE for: eigenv8', '0.0244'],  eigenvector element 8 of 9 Mean Average Error
- ['MAE for: eigenv9', '0.0290'],  eigenvector element 9 of 9 Mean Average Error
- ['sumEigenvectorMAE', '0.0574'], sum of eigen vector elements Mean Average Error
- ['sumEigenvaluesMAE', '0.0454']] sum of all 9 eigenvalue elements from 3 eigenvectors Mean Average Error
-
-[['%MAE for: eigen1', '0.0128'],
- ['%MAE for: eigen2', '0.0587'],
- ['%MAE for: eigen3', '0.0474'],
- ['%MAE for: eigenv1', '0.0092'],
- ['%MAE for: eigenv2', '0.0162'],
- ['%MAE for: eigenv3', '0.0144'],
- ['%MAE for: eigenv4', '0.0084'],
- ['%MAE for: eigenv5', '0.0124'],
- ['%MAE for: eigenv6', '0.0137'],
- ['%MAE for: eigenv7', '0.0073'],
- ['%MAE for: eigenv8', '0.0122'],
- ['%MAE for: eigenv9', '0.0146'],
- ['sumEigenvectorMAE%', '0.0074'],
- ['sumEigenvaluesMAE%', '0.0025']]
-
-My model for Hermitian Matrices is better, however % error based on term ranges is very similar
-
-For Hermitian matrices to an error of 0.03 for matrices with values between 0-6 and 1.7% error
-For Non Hermitian matrice to an error of 0.036 for matrices with values between 0-6 and 1.69% error
+***********************************************************************************************************
+Test 4 generated a Linear Regression model with an R-Squared value of **0.044** averaged across all 9 cells 
+of the inverse of a 3x3 matrix. **This is not sufficient for determining
+the inverse of a 3x3 matrix but the progression of dependence on terms is demonstrated**
+***********************************************************************************************************
 
 
 
+## Neural Network
 
+Neural Network to model matrix Eigenvectors and Eigenvalues and sum of Eigenvalues and 
+sum of Eigenvector elements with inputs to Neural Network: matrix elements and each 
+matrix element multiplied by every other matrix element. Model with Hermitian and Non Hermitian matrices.
 
+Investigate sum of Eigenvalues and Eigenvectors components to see if Neural Network model accurately and use
+this sum in future Neural Network modelling as a term - passed directly to the neural network instead of having its value in a layer - this will decrease modelling time in neural network modelling
 
+Paul Smith - Instructor at Brainstation <br>
+Credited for Neural Network Model Parameters for Eigenvector Eigenvalue Neural Network
 
-LinearRegressionAdjoint.ipynb shows how the adjoint matrix can be perfectly approximated by terms of 
-each matrix element multiplied by every other matrix element but this is just a property of adjoint 
-matrices for 3x3 matrices
+model = keras.Sequential()<br>
+#Declare the hidden layers<br>
+model.add(layers.Dense(120, activation="relu")) <br>model.add(layers.Dense(120, activation="relu")) <br>model.add(layers.Dense(120, activation="relu")) <br>model.add(layers.Dense(60, activation="relu")) <br>model.add(layers.Dense(30, activation="relu"))<br>
+#Declare the output layer<br>
+model.add(layers.Dense(12, activation="linear"))<br>
 
-a formula for the inverse of a matrix is adjoint matrix/determinant
+Evaluate Neural Network Models with Mean Average Error for the terms using 
+datasets of randomly generated 3x3 matrices and corresponding eigenvalues/eigenvectors. Also use Mean Average Error as a ratio against the range of values
+**EigenVectorsEigenValuesNeuralNetwork.ipynb** results included Notebook
 
-determinant formula is |A| = a11 (a22 a33 – a23 a32) – a12 (a21 a33 – a23 a31) + a13 (a21 a32 – a22 a31)
-The adjoint of a square matrix A = [aij]n×n is defined as the transpose of the matrix [Aij]n×n , where Aij 
-is the cofactor of the element aij. In other words, the transpose of a cofactor matrix of the square matrix 
-is called the adjoint of the matrix. 
+### List of Neural Network Results
+*Neural Network Mean Average Error*<br>
+3501 randomly generated matrices with values between 0-6 for **Hermitian** 3x3 Matrices
 
-a formlua for the adjoint of a matrix is as follows
+['MAE for: eigen1', '0.0855']    eigenvalue 1 Mean Average error<br>
+['MAE for: eigen2', '0.0529']    eigenvalue 2 Mean Average error<br>
+['MAE for: eigen3', '0.0474']    eigenvalue 3 Mean Average error<br>
+['MAE for: eigenv1', '0.0171']   eigenvector element 1 of 9 Mean Average Error<br>
+['MAE for: eigenv2', '0.0294']   eigenvector element 2 of 9 Mean Average Error<br>
+['MAE for: eigenv3', '0.0266']   eigenvector element 3 of 9 Mean Average Error<br>
+['MAE for: eigenv4', '0.0163']   eigenvector element 4 of 9 Mean Average Error<br>
+['MAE for: eigenv5', '0.0281']   eigenvector element 5 of 9 Mean Average Error<br>
+['MAE for: eigenv6', '0.0245']   eigenvector element 6 of 9 Mean Average Error<br>
+['MAE for: eigenv7', '0.0152']   eigenvector element 7 of 9 Mean Average Error<br>
+['MAE for: eigenv8', '0.0245']   eigenvector element 8 of 9 Mean Average Error<br>
+['MAE for: eigenv9', '0.0271']   eigenvector element 9 of 9 Mean Average Error<br>
+['sumEigenvectorMAE', '0.0525']  sum of eigen vector elements Mean Average Error<br>
+['sumEigenvaluesMAE', '0.0499']  sum of all 9 eigenvalue elements from 3 eigenvectors Mean Average Error<br><br>
 
-import math as mth
-# get cofactors matrix 
-def getcofat(x):
-    eps = 1e-6
-    detx = np.linalg.det(x)
-    if (mth.fabs(detx) < eps):
-        print("No possible to get cofactors for singular matrix with this method")
-        x = None
-        return x
-    invx = np.linalg.pinv(x)
-    invxT = invx.T
-    x = invxT * detx
-    return x
-# get adj matrix
-def getadj(x):
-    eps = 1e-6
-    detx = np.linalg.det(x)
-    if (mth.fabs(detx) < eps):
-        print("No possible to get adj matrix for singular matrix with this method")
-        adjx = None
-        return adjx
-    cofatx = getcofat(x)
-    adjx = cofatx.T
-    return adjx
+*Neural Network Mean Average Error as a percentage against range of values in the terms* <br>
+3501 randomly generated matrices with values between 0-6 for **Hermitian** 3x3 Matrices
 
+['%MAE for: eigen1', '0.0122']   eigenvalue 1 Mean Average error As Percentage versus range of values<br>
+['%MAE for: eigen2', '0.0640']   eigenvalue 2 Mean Average error As Percentage versus range of values<br>
+['%MAE for: eigen3', '0.0424']   eigenvalue 3 Mean Average error As Percentage versus range of values<br>
+['%MAE for: eigenv1', '0.0086']  eigenvector element 1 of 9 Mean Average Error As Percentage versus range of values<br>
+['%MAE for: eigenv2', '0.0147']  eigenvector element 2 of 9 Mean Average Error As Percentage versus range of values<br>
+['%MAE for: eigenv3', '0.0134']  eigenvector element 3 of 9 Mean Average Error As Percentage versus range of values<br>
+['%MAE for: eigenv4', '0.0163']  eigenvector element 4 of 9 Mean Average Error As Percentage versus range of values<br>
+['%MAE for: eigenv5', '0.0141']  eigenvector element 5 of 9 Mean Average Error As Percentage versus range of values<br>
+['%MAE for: eigenv6', '0.0123']  eigenvector element 6 of 9 Mean Average Error As Percentage versus range of values<br>
+['%MAE for: eigenv7', '0.0077']  eigenvector element 7 of 9 Mean Average Error As Percentage versus range of values<br>
+['%MAE for: eigenv8', '0.0123']  eigenvector element 8 of 9 Mean Average Error As Percentage versus range of values<br>
+['%MAE for: eigenv9', '0.0136']  eigenvector element 9 of 9 Mean Average Error As Percentage versus range of values<br>
+['sumEigenvectorMAE%', '0.0067'] sum of eigen vector elements Mean Average Error As Percentage versus range of values<br>
+['sumEigenvaluesMAE%', '0.0028'] sum of all 9 eigenvalue elements from 3 eigenvectors Mean Average Error As Percentage versus range of values<br>
 
-NEXT STEPS:
+*Neural Network Mean Average Error*<br>
+3501 randomly generated matrices with values between 0-6 for ***Non Hermitian*** 3x3 matrices
 
-More investigation into tweaking my neural network model parametets to get a lower Mean Average Error
-More investigation for larger adjoint matrices
-More investigation for neural networks for inverse of a matrix, larger matrices for eigenvectors eigenvalues
-neural networks
-Plug in calcualte models to numpy and see how fast they are compared to current formulas
-More mathematical investigation into current formulas for matrix inversion and applying terms to machine learning
+['MAE for: eigen1', '0.0898']   eigenvalue 1 Mean Average error<br>
+['MAE for: eigen2', '0.0486']   eigenvalue 2 Mean Average error<br>
+['MAE for: eigen3', '0.0530']   eigenvalue 3 Mean Average error<br>
+['MAE for: eigenv1', '0.0183']  eigenvector element 1 of 9 Mean Average Error<br>
+['MAE for: eigenv2', '0.0324']  eigenvector element 2 of 9 Mean Average Error<br>
+['MAE for: eigenv3', '0.0288']  eigenvector element 3 of 9 Mean Average Error<br>
+['MAE for: eigenv4', '0.0167']  eigenvector element 4 of 9 Mean Average Error <br>
+['MAE for: eigenv5', '0.0247']  eigenvector element 5 of 9 Mean Average Error<br>
+['MAE for: eigenv6', '0.0274']  eigenvector element 6 of 9 Mean Average Error<br>
+['MAE for: eigenv7', '0.0145']  eigenvector element 7 of 9 Mean Average Error<br>
+['MAE for: eigenv8', '0.0244']  eigenvector element 8 of 9 Mean Average Error<br>
+['MAE for: eigenv9', '0.0290']  eigenvector element 9 of 9 Mean Average Error<br>
+['sumEigenvectorMAE', '0.0574'] sum of eigen vector elements Mean Average Error<br>
+['sumEigenvaluesMAE', '0.0454'] sum of all 9 eigenvalue elements from 3 eigenvectors Mean Average Error<br>
+
+*Neural Network Mean Average Error as a percentage against range of values in the terms* <br>
+3501 randomly generated matrices with values between 0-6 for **Non Hermitian** 3x3 Matrices
+
+['%MAE for: eigen1', '0.0128']  eigenvalue 1 Mean Average error As Percentage versus range of values<br>
+['%MAE for: eigen2', '0.0587']  eigenvalue 2 Mean Average error As Percentage versus range of values<br>
+['%MAE for: eigen3', '0.0474']  eigenvalue 3 Mean Average error As Percentage versus range of values<br>
+['%MAE for: eigenv1', '0.0092'] eigenvector element 1 of 9 Mean Average Error As Percentage versus range of values<br>
+['%MAE for: eigenv2', '0.0162'] eigenvector element 2 of 9 Mean Average Error As Percentage versus range of values<br>
+['%MAE for: eigenv3', '0.0144'] eigenvector element 3 of 9 Mean Average Error As Percentage versus range of values<br>
+['%MAE for: eigenv4', '0.0084'] eigenvector element 4 of 9 Mean Average Error As Percentage versus range of values<br>
+['%MAE for: eigenv5', '0.0124'] eigenvector element 5 of 9 Mean Average Error As Percentage versus range of values<br>
+['%MAE for: eigenv6', '0.0137'] eigenvector element 6 of 9 Mean Average Error As Percentage versus range of values<br>
+['%MAE for: eigenv7', '0.0073'] eigenvector element 7 of 9 Mean Average Error As Percentage versus range of values<br>
+['%MAE for: eigenv8', '0.0122'] eigenvector element 8 of 9 Mean Average Error As Percentage versus range of values<br>
+['%MAE for: eigenv9', '0.0146'] eigenvector element 9 of 9 Mean Average Error As Percentage versus range of values<br>
+['sumEigenvectorMAE%', '0.0074']sum of eigen vector elements Mean Average Error As Percentage versus range of values<br>
+['sumEigenvaluesMAE%', '0.0025']sum of all 9 eigenvalue elements from 3 eigenvectors Mean Average Error As Percentage versus range of values<br>
+
+****************************************************************************************************************
+Hermitian Matrices Model is better however % error based on term ranges are very similar
+
+Considering the average of all Neural Networks results from this notebook, Hermitian matrices 
+had an error of **0.03 or 1.7% error** considering the range of values
+Non Hermitian matrices to an error of **0.036** for matrices with values and **1.69%** error
+****************************************************************************************************************
+
+**LinearRegressionAdjoint.ipynb**
+3x3 Adjoint of a matrix can be perfectly approximated by terms of each matrix element multiplied by every other matrix element 
+<br>this is a property of adjoint matrices of a 3x3 matrix. Linear Regression parameter results included in Notebook.
+
+## NEXT STEPS ##
+
+Repeat Linear Regression larger matrices and with a wider set of randowmly generated matrices to verify results<br>
+Automate Testing of Neural Network model parameters to get a lower Mean Average Error and faster algorithms<br>
+Model larger adjoint matrices then 3x3 with Linear Regression<br>
+Model Adjoint Matrices with Neural Networks<br>
+Combine multiple machine learning techniques to a single solution<br>
+More mathematical investigation into current formulas for matrix inversion to generate inputs for to machine learning
 
 
 
